@@ -1,20 +1,5 @@
------------------- change this -------------------
-
-admins = {
-    'steam:110000105959047',
-    --'license:1234975143578921327',
-}
-
--- Set this to false if you don't want the weather to change automatically every 10 minutes.
-DynamicWeather = true
-
---------------------------------------------------
-debugprint = false -- don't touch this unless you know what you're doing or you're being asked by Vespura to turn this on.
---------------------------------------------------
-
-
-
-
+local DynamicWeather = true -- set this to false if you don't want the weather to change automatically every 10 minutes.
+local debugprint = false -- enable debug mode
 
 
 
@@ -48,19 +33,6 @@ AddEventHandler('vSync:requestSync', function()
     TriggerClientEvent('vSync:updateWeather', -1, CurrentWeather, blackout)
     TriggerClientEvent('vSync:updateTime', -1, baseTime, timeOffset, freezeTime)
 end)
-
-function isAllowedToChange(player)
-    local allowed = false
-    for i,id in ipairs(admins) do
-        for x,pid in ipairs(GetPlayerIdentifiers(player)) do
-            if debugprint then print('admin id: ' .. id .. '\nplayer id:' .. pid) end
-            if string.lower(pid) == string.lower(id) then
-                allowed = true
-            end
-        end
-    end
-    return allowed
-end
 
 RegisterCommand('freezetime', function(source, args)
     if source ~= 0 then
