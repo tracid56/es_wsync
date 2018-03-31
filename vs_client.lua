@@ -6,10 +6,10 @@ local timer = 0
 local freezeTime = false
 local blackout = false
 
-RegisterNetEvent('vSync:updateWeather')
-AddEventHandler('vSync:updateWeather', function(NewWeather, newblackout)
-    CurrentWeather = NewWeather
-    blackout = newblackout
+RegisterNetEvent('es_wsync:updateWeather')
+AddEventHandler('es_wsync:updateWeather', function(NewWeather, newblackout)
+	CurrentWeather = NewWeather
+	blackout = newblackout
 end)
 
 Citizen.CreateThread(function()
@@ -36,8 +36,8 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterNetEvent('vSync:updateTime')
-AddEventHandler('vSync:updateTime', function(base, offset, freeze)
+RegisterNetEvent('es_wsync:updateTime')
+AddEventHandler('es_wsync:updateTime', function(base, offset, freeze)
     freezeTime = freeze
     timeOffset = offset
     baseTime = base
@@ -54,7 +54,7 @@ Citizen.CreateThread(function()
             timer = GetGameTimer()
         end
         if freezeTime then
-            timeOffset = timeOffset + baseTime - newBaseTime			
+            timeOffset = timeOffset + baseTime - newBaseTime
         end
         baseTime = newBaseTime
         hour = math.floor(((baseTime+timeOffset)/60)%24)
@@ -64,7 +64,7 @@ Citizen.CreateThread(function()
 end)
 
 AddEventHandler('playerSpawned', function()
-    TriggerServerEvent('vSync:requestSync')
+    TriggerServerEvent('es_wsync:requestSync')
 end)
 
 Citizen.CreateThread(function()
@@ -87,7 +87,7 @@ function ShowNotification(text, blink)
     DrawNotification(blink, false)
 end
 
-RegisterNetEvent('vSync:notify')
-AddEventHandler('vSync:notify', function(message, blink)
+RegisterNetEvent('es_wsync:notify')
+AddEventHandler('es_wsync:notify', function(message, blink)
     ShowNotification(message, blink)
 end)
