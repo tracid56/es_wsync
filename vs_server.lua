@@ -243,7 +243,7 @@ TriggerEvent('es:addGroupCommand', 'time', 'admin', function(source, args, user)
 	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficient Permissions.")
-end, {help = "Change the time", params = {{ name="hours", help="A number between 0 - 23"}, { name="minutes", help="A number between 0 - 59"}})
+end, {help = "Change the time", params = {{ name="hours", help="A number between 0 - 23"}, { name="minutes", help="A number between 0 - 59"}}})
 
 Citizen.CreateThread(function()
 	while true do
